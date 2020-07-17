@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Twoxzi.RemoteManager.Tools.OraySunLogin</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteManager.Entity\RemoteManager.Entity.csproj" />
+    <ProjectReference Include="..\RemoteManager.Tool\RemoteManager.Tools.csproj" />
+  </ItemGroup>
+
+</Project>
