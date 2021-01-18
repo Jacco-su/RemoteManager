@@ -27,10 +27,12 @@ namespace Twoxzi.RemoteManager.Entity
         {
             base.OnConfiguring(optionsBuilder);
             // 默认的数据库链接
-            if(!optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
                 String path = ConfigurationManager.ConnectionStrings["rm"]?.ConnectionString ?? "Data Source=rm.db";
-
+#if DEBUG
+                path = "Data Source=" + System.IO.Path.Combine(System.IO.Path.GetTempPath(), "rm.db");
+#endif
                 optionsBuilder.UseSqlite(path);
             }
             //this.Database.EnsureCreated();
@@ -62,19 +64,23 @@ namespace Twoxzi.RemoteManager.Entity
         public static MyDbContext CreateDb(String dbName = null)
         {
             MyDbContext dbo;
-            if(dbName == null || dbName.Length == 0)
+            if (dbName == null || dbName.Length == 0)
             {
                 dbo = new MyDbContext();
             }
             else
             {
                 DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
-                optionsBuilder.UseSqlite($"Data source={dbName}");
+                String path = ConfigurationManager.ConnectionStrings["rm"]?.ConnectionString ?? "Data Source={dbName}";
+#if DEBUG
+                path = "Data Source="+ System.IO.Path.Combine(System.IO.Path.GetTempPath(), "rm.db");
+#endif
+                optionsBuilder.UseSqlite(path);
                 dbo = new MyDbContext(optionsBuilder.Options);
             }
             dbo.Database.EnsureCreated();
             //var con = dbo.Database.GetDbConnection();
-            if(dbo.Database.GetPendingMigrations().Any())
+            if (dbo.Database.GetPendingMigrations().Any())
             {
                 dbo.Database.Migrate();
             }

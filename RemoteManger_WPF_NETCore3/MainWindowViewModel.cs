@@ -294,6 +294,12 @@ namespace Twoxzi.RemoteManager
                                             return;
                                         }
                                         var info = listView.SelectedItem as RemoteInfo4Binding;
+
+                                        if (String.IsNullOrWhiteSpace(info.ID) || String.IsNullOrWhiteSpace(info.ToolCode))
+                                        {
+                                            MessageBox.Show("必须输入ID和选择远程工具");
+                                        }
+
                                         // 保存
                                         using(MyDbContext dbo = MyDbContext.CreateDb())
                                         {
@@ -381,7 +387,10 @@ namespace Twoxzi.RemoteManager
             }
         }
 
-
+        /// <summary>
+        /// 打开
+        /// </summary>
+        /// <param name="listView"></param>
         private void LinkExecuteBase(ListView listView)
         {
             try

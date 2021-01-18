@@ -10,7 +10,7 @@ namespace Twoxzi.RemoteManager.Tools.TeamViewer
     /// <summary>
     /// TeamViewer桌面远程
     /// </summary>
-    [RemoteTool(ToolCode = "OSL", Memo = "向日葵桌面远程", ToolName = "向日葵桌面远程")]
+    [RemoteTool(ToolCode = "OSL", Memo = "向日葵桌面远程,最高支持10版，暂不支持11片版", ToolName = "向日葵桌面远程")]
     public class OraySunLoginDesktop : RemoteToolBase
     {
         /// <summary>

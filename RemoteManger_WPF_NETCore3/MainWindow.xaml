@@ -96,7 +96,14 @@
                 <TextBlock Text="分组名称：" DockPanel.Dock="Top"/>
                 <TextBox Text="{Binding ElementName=listView,Path=SelectedItem.GroupName ,UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top"/>
                 <TextBlock Text="工具：" DockPanel.Dock="Top"/>
-                <ComboBox ItemsSource="{Binding RemoteToolMetadataList}" DockPanel.Dock="Top" SelectedItem="{Binding ElementName=listView,Path=SelectedItem.RemoteToolMetadata}" DisplayMemberPath="ToolName" />
+                <ComboBox ItemsSource="{Binding RemoteToolMetadataList}" DockPanel.Dock="Top" SelectedItem="{Binding ElementName=listView,Path=SelectedItem.RemoteToolMetadata}"  >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding ToolName}" ToolTip="{Binding Memo}" >
+                            </ListBoxItem>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <TextBlock Text="备注：" DockPanel.Dock="Top"/>
                 <TextBox Text="{Binding ElementName=listView,Path=SelectedItem.Memo ,UpdateSourceTrigger=PropertyChanged}" 
                          MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DockPanel},Path=MaxWidth }"
